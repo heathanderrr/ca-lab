@@ -107,8 +107,21 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
      * React to a button click that results in evt.
      * @param evt the ActionEvent to react to
      */
+    @Override
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
+        Object src = evt.getSource();
+        String cmd = evt.getActionCommand();
+
+        if (src == logOut) {
+            if (logoutController != null) {
+                logoutController.execute();
+            } else {
+                System.err.println("LogoutController not set.");
+            }
+            return;
+        }
+
+        System.out.println("Click " + cmd);
     }
 
     @Override
